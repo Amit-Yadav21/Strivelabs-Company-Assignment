@@ -1,0 +1,286 @@
+/* General Styling */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 80px 20px 20px;
+  background-color: #f0f2f5;
+  color: #333;
+}
+
+/* Header Styling */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding: 15px;
+  background-color: #70b6f7;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  z-index: 1000; 
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 600;
+  animation: fadeInDown 1s ease-out;
+}
+
+input[type="text"],
+select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  width: 100%;
+  max-width: 250px;
+  transition: box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+select:focus {
+  outline: none;
+  box-shadow: 0 0 5px #b2cbe6;
+}
+
+select {
+  cursor: pointer;
+}
+
+/* Country List Styling */
+#country-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Country Card Styling */
+.country-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 220px;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.country-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.country-card img {
+  width: 100%;
+  height: 150px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+.country-card img:hover {
+  transform: scale(1.05);
+}
+
+.country-card h2 {
+  font-size: 20px;
+  color: #333;
+  margin: 10px 0;
+}
+
+.country-card p {
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0;
+}
+
+/* Button Styling */
+button {
+  background-color: #00ffff;
+  color: black;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #35ee07;
+  transform: translateY(-3px);
+}
+
+/* Country Details Styling */
+#country-details-container {
+  max-width: 100%;
+  width: 30%;
+  padding: 20px;
+  margin: 20px auto;
+  background-color: #5a5959;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* animation: fadeIn 0.8s ease-out; */
+}
+
+#country-details h2 {
+  font-size: 24px;
+  color: #ffffff;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+#country-details p {
+  font-size: 16px;
+  color: #ffffff;
+  margin: 8px 0;
+  text-align: center;
+}
+
+/* Back Button Styling */
+#back-button {
+  /* background-color: #ddd; */
+  color: #333;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+#back-button:hover {
+  background-color: #bbb;
+}
+
+/* Pagination Buttons Styling */
+#pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+#pagination-controls button {
+  background-color: #06aa79;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#pagination-controls button:hover {
+  background-color: #848688;
+  color: black;
+  transform: translateY(-3px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Media Queries for Smaller Screens */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  input[type="text"],
+  select {
+    font-size: 14px;
+    max-width: 200px;
+  }
+
+  .country-card {
+    max-width: 350px;
+  }
+
+  #country-details h2 {
+    font-size: 20px;
+  }
+
+  #country-details p {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 600px) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  header {
+    flex-direction: row;
+    text-align: center;
+    line-height: 1;
+  }
+
+  input[type="text"],
+  select {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .country-card {
+    max-width: 350px;
+    padding: 10px;
+  }
+
+  #country-list{
+    margin-top: 6rem;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  button {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
