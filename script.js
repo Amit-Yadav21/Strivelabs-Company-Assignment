@@ -1,6 +1,7 @@
 const countryList = document.getElementById("country-list");
 const searchInput = document.getElementById("search");
 const regionFilter = document.getElementById("region-filter");
+const languageFilter = document.getElementById("language-filter");
 const nextPageButton = document.getElementById("next-page");
 const prevPageButton = document.getElementById("prev-page");
 const pageInfo = document.getElementById("page-info");
@@ -8,7 +9,7 @@ const pageInfo = document.getElementById("page-info");
 let countries = [];
 let filteredCountries = [];
 let currentPage = 1;
-let countriesPerPage = 10; // Default value, will be updated for responsive behavior
+let countriesPerPage = 10;
 
 // Function to dynamically set countriesPerPage based on screen size
 function updateCountriesPerPage() {
@@ -19,7 +20,7 @@ function updateCountriesPerPage() {
   } else {
     countriesPerPage = 15; // Desktop view
   }
-  displayCountries(); // Update display based on new setting
+  displayCountries();
 }
 
 // Initial screen size check and listener for resizing
@@ -62,12 +63,32 @@ function displayCountries() {
 function filterCountries() {
   const searchValue = searchInput.value.toLowerCase();
   const selectedRegion = regionFilter.value;
+  const selectedLanguage = languageFilter.value;
 
-  // Filter based on search and selected region
+  // Determine which filter to apply
   filteredCountries = countries.filter(country => {
     const matchesSearch = country.name.common.toLowerCase().includes(searchValue);
-    const matchesRegion = selectedRegion === "all" || country.region === selectedRegion;
-    return matchesSearch && matchesRegion;
+
+    let matchesRegion = true; // Default to true
+    if (selectedRegion !== "all") {
+      matchesRegion = country.region === selectedRegion;
+    }
+
+    let matchesLanguage = true; // Default to true
+    if (selectedLanguage !== "all") {
+      matchesLanguage = country.languages && Object.values(country.languages).includes(selectedLanguage);
+    }
+
+    // Only apply one filter at a time
+    if (selectedRegion !== "all" && selectedLanguage !== "all") {
+      return matchesSearch && matchesRegion; // Only region filter applied
+    } else if (selectedLanguage !== "all") {
+      return matchesSearch && matchesLanguage; // Only language filter applied
+    } else if (selectedRegion !== "all") {
+      return matchesSearch && matchesRegion; // Only region filter applied
+    } else {
+      return matchesSearch; // No filter applied
+    }
   });
 
   currentPage = 1;
@@ -105,8 +126,10 @@ function viewCountryDetails(countryName) {
   window.location.href = "country-details.html";
 }
 
+// Event listeners for filters and pagination
 searchInput.addEventListener("input", filterCountries);
 regionFilter.addEventListener("change", filterCountries);
+languageFilter.addEventListener("change", filterCountries); // Event listener for language filter
 nextPageButton.addEventListener("click", nextPage);
 prevPageButton.addEventListener("click", prevPage);
 

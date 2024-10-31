@@ -64,7 +64,23 @@ select {
 #region-filter{
   width: auto;
 }
+#language-filter{
+  width: auto;
+}
 /* ------------------------------------------------- */
+
+#nav-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Styles for pagination */
+#pagination-controls {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
 
 /* -----------------------------Country List Styling */
 #country-list {

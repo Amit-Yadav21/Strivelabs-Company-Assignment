@@ -1,36 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Country Explorer</title>
-    <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-    <header>
-        <h1>Country Explorer</h1>
-        <input type="text" id="search" placeholder="Search for a country..." />
-        <select id="region-filter">
-            <option value="all">Filter by Region</option>
-            <option value="Africa">Africa</option>
-            <option value="Antarctic">Antarctic</option>
-            <option value="Americas">Americas</option>
-            <option value="Asia">Asia</option>
-            <option value="Europe">Europe</option>
-            <option value="Oceania">Oceania</option>
-        </select>
-    </header>
-    <main id="country-list"></main>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Country Explorer</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <header>
+            <h1>Country Explorer</h1>
+            <div id="nav-content">
+                <input type="text" id="search"
+                    placeholder="Search for a country..." />
+                <select id="region-filter">
+                    <option value="all">Filter by Region</option>
+                    <option value="Africa">Africa</option>
+                    <option value="Antarctic">Antarctic</option>
+                    <option value="Americas">Americas</option>
+                    <option value="Asia">Asia</option>
+                    <option value="Europe">Europe</option>
+                    <option value="Oceania">Oceania</option>
+                </select>
+                <select id="language-filter">
+                    <option value="all">Filter by Language</option>
+                    <option value="English">English</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="Mandarin">Mandarin</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="French">French</option>
+                    <option value="Arabic">Arabic</option>
+                    <option value="Bengali">Bengali</option>
+                    <option value="Russian">Russian</option>
+                    <option value="Portuguese">Portuguese</option>
+                    <option value="Indonesian">Indonesian</option>
+                    <option value="Urdu">Urdu</option>
+                    <option value="German">German</option>
+                    <option value="Japanese">Japanese</option>
+                    <option value="Swahili">Swahili</option>
+                    <option value="Turkish">Turkish</option>
+                    <option value="Korean">Korean</option>
+                    <option value="Vietnamese">Vietnamese</option>
+                    <option value="Italian">Italian</option>
+                    <option value="Tamil">Tamil</option>
+                    <option value="Persian">Persian</option>
+                    <option value="Dutch">Dutch</option>
+                    <option value="Thai">Thai</option>
+                    <option value="Greek">Greek</option>
+                    <option value="Hungarian">Hungarian</option>
+                    <option value="Punjabi">Punjabi</option>
+                    <option value="Polish">Polish</option>
+                    <option value="Czech">Czech</option>
+                    <option value="Romanian">Romanian</option>
+                    <option value="Hebrew">Hebrew</option>
+                    <option value="Swedish">Swedish</option>
+                    <option value="Malay">Malay</option>
+                    <option value="Filipino">Filipino</option>
+                    <option value="Danish">Danish</option>
+                    <option value="Finnish">Finnish</option>
+                    <option value="Norwegian">Norwegian</option>
+                    <option value="Burmese">Burmese</option>
+                    <option value="Amharic">Amharic</option>
+                    <option value="Nepali">Nepali</option>
+                    <option value="Sinhalese">Sinhalese</option>
+                    <option value="Pashto">Pashto</option>
+                    <option value="Somali">Somali</option>
+                    <option value="Catalan">Catalan</option>
+                    <option value="Kirundi">Kirundi</option>
+                    <option value="Lao">Lao</option>
+                    <option value="Papiamento">Papiamento</option>
+                    <option value="Herero">Herero</option>
+                    <option value="Khoekhoe">Khoekhoe</option>
+                    <option value="Kwangali">Kwangali</option>
+                    <option value="Lozi">Lozi</option>
+                    <option value="Ndonga">Ndonga</option>
+                    <option value="Tswana">Tswana</option>
+                    <option value="Chewa">Chewa</option>
+                    <option value="Shona">Shona</option>
+                    <option value="Tonga">Tonga</option>
+                    <option value="Tsonga">Tsonga</option>
+                    <option value="Venda">Venda</option>
+                    <option value="Xhosa">Xhosa</option>
+                    <option value="Southern Ndebele">Southern Ndebele</option>
+                    <option value="Northern Ndebele">Northern Ndebele</option>
+                    <option value="Zimbabwean Sign Language">Zimbabwean Sign
+                        Language</option>
+                    <option value="Chibarwe">Chibarwe</option>
+                    <option value="Kalanga">Kalanga</option>
+                    <option value="Khoisan">Khoisan</option>
+                    <option value="Ndau">Ndau</option>
+                    <option value="Northern Sotho">Northern Sotho</option>
+                    <option value="Southern Sotho">Southern Sotho</option>
+                    <option value="Swazi">Swazi</option>
+                    <option value="Zulu">Zulu</option>
+                    <option value="Albanian">Albanian</option>
+                    <option value="Armenian">Armenian</option>
+                    <option value="Azerbaijani">Azerbaijani</option>
+                    <option value="Belarusian">Belarusian</option>
+                    <option value="Bosnian">Bosnian</option>
+                    <option value="Bulgarian">Bulgarian</option>
+                    <option value="Croatian">Croatian</option>
+                    <option value="Estonian">Estonian</option>
+                    <option value="Georgian">Georgian</option>
+                    <option value="Icelandic">Icelandic</option>
+                    <option value="Kazakh">Kazakh</option>
+                    <option value="Khmer">Khmer</option>
+                    <option value="Latvian">Latvian</option>
+                    <option value="Lithuanian">Lithuanian</option>
+                    <option value="Macedonian">Macedonian</option>
+                    <option value="Mongolian">Mongolian</option>
+                    <option value="Slovak">Slovak</option>
+                    <option value="Slovene">Slovene</option>
+                    <option value="Tajik">Tajik</option>
+                    <option value="Tatar">Tatar</option>
+                    <option value="Tigrinya">Tigrinya</option>
+                    <option value="Turkmen">Turkmen</option>
+                    <option value="Ukrainian">Ukrainian</option>
+                    <option value="Uzbek">Uzbek</option>
+                </select>
+            </div>
+        </header>
+        <main id="country-list"></main>
 
-    <!-- Pagination Controls -->
-    <div id="pagination-controls">
-        <span class="border">
-            <button id="prev-page" style="display: none;">Previous</button>
-            <span id="page-info">Page 1 of 1</span>
-            <button id="next-page" style="display: none;">Next</button>
-        </span>
-    </div>
+        <!-- Pagination Controls -->
+        <div id="pagination-controls">
+            <span class="border">
+                <button id="prev-page" style="display: none;">Previous</button>
+                <span id="page-info">Page 1 of 1</span>
+                <button id="next-page" style="display: none;">Next</button>
+            </span>
+        </div>
 
-    <script src="./script.js"></script>
-</body>
+        <script src="./script.js"></script>
+    </body>
 </html>
