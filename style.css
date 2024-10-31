@@ -27,11 +27,11 @@ header {
   background-color: #70b6f7;
   color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  right: 0; 
-  z-index: 1000; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 h1 {
@@ -61,7 +61,11 @@ select {
   cursor: pointer;
 }
 
-/* Country List Styling */
+#region-filter{
+  width: auto;
+}
+
+/* -----------------------------Country List Styling */
 #country-list {
   display: flex;
   flex-wrap: wrap;
@@ -128,14 +132,15 @@ button:hover {
   background-color: #35ee07;
   transform: translateY(-3px);
 }
+/* ------------------------------------------------------- */
 
-/* Country Details Styling */
+/* -------------------------- Country Details Styling */
 #country-details-container {
   max-width: 100%;
-  width: 30%;
+  width: 35%;
   padding: 20px;
-  margin: 20px auto;
-  background-color: #5a5959;
+  margin: 0px auto;
+  background-color: rgb(241, 223, 189);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -143,18 +148,23 @@ button:hover {
   /* animation: fadeIn 0.8s ease-out; */
 }
 
+
+
 #country-details h2 {
   font-size: 24px;
-  color: #ffffff;
+  color: black;
   margin-bottom: 15px;
   text-align: center;
 }
 
 #country-details p {
   font-size: 16px;
-  color: #ffffff;
+  color:  black;
+  padding: 5px;
   margin: 8px 0;
-  text-align: center;
+  /* border: 1px solid; */
+  background-color: white;
+  /* text-align: center; */
 }
 
 /* Back Button Styling */
@@ -173,6 +183,8 @@ button:hover {
   background-color: #bbb;
 }
 
+/* ----------------------------------------------------- */
+
 /* ------------------------Pagination Buttons Styling */
 #pagination-controls {
   display: flex;
@@ -183,7 +195,7 @@ button:hover {
   margin-bottom: 20px;
 }
 
-#pagination-controls .border{
+#pagination-controls .border {
   border: 1px solid;
   padding: 5px;
   border-radius: 10px;
@@ -205,6 +217,7 @@ button:hover {
   color: black;
   transform: translateY(-3px);
 }
+
 /* --------------------------------------------- */
 
 /* Animations */
@@ -212,6 +225,7 @@ button:hover {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -222,6 +236,7 @@ button:hover {
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -282,7 +297,7 @@ button:hover {
     padding: 10px;
   }
 
-  #country-list{
+  #country-list {
     margin-top: 6rem;
   }
 

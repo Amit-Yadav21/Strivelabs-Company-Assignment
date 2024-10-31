@@ -1,40 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Country Explorer</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>
+        <h1>Country Explorer</h1>
+        <input type="text" id="search" placeholder="Search for a country..." />
+        <select id="region-filter">
+            <option value="all">Filter by Region</option>
+            <option value="Africa">Africa</option>
+            <option value="Antarctic">Antarctic</option>
+            <option value="Americas">Americas</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
+        </select>
+    </header>
+    <main id="country-list"></main>
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Country Explorer</title>
-        <link rel="stylesheet" href="style.css" />
-    </head>
+    <!-- Pagination Controls -->
+    <div id="pagination-controls">
+        <span class="border">
+            <button id="prev-page" style="display: none;">Previous</button>
+            <span id="page-info">Page 1 of 1</span>
+            <button id="next-page" style="display: none;">Next</button>
+        </span>
+    </div>
 
-    <body>
-        <header>
-            <h1>Country Explorer</h1>
-            <input type="text" id="search"
-                placeholder="Search for a country..." />
-            <select id="region-filter">
-                <option value="all">Filter by Region</option>
-                <option value="Africa">Africa</option>
-                <option value="Americas">Americas</option>
-                <option value="Asia">Asia</option>
-                <option value="Europe">Europe</option>
-                <option value="Oceania">Oceania</option>
-            </select>
-        </header>
-
-        <main id="country-list"></main>
-
-        <!-- Pagination Controls -->
-        <div id="pagination-controls">
-            <span class="border">
-                <button id="prev-page" style="display: none;">Previous</button>
-                <span id="page-info">Page 1 of 1</span>
-                <button id="next-page" style="display: none;">Next</button>
-            </span>
-        </div>
-
-        <script src="./script.js"></script>
-    </body>
-
+    <script src="./script.js"></script>
+</body>
 </html>

@@ -30,7 +30,7 @@ async function fetchCountries() {
   try {
     const response = await fetch("https://restcountries.com/v3.1/all");
     countries = await response.json();
-    filteredCountries = countries;
+    filteredCountries = countries; // Set filteredCountries to all countries by default
     displayCountries();
   } catch (error) {
     console.error("Error fetching countries:", error);
@@ -63,6 +63,7 @@ function filterCountries() {
   const searchValue = searchInput.value.toLowerCase();
   const selectedRegion = regionFilter.value;
 
+  // Filter based on search and selected region
   filteredCountries = countries.filter(country => {
     const matchesSearch = country.name.common.toLowerCase().includes(searchValue);
     const matchesRegion = selectedRegion === "all" || country.region === selectedRegion;
@@ -70,7 +71,7 @@ function filterCountries() {
   });
 
   currentPage = 1;
-  displayCountries();
+  displayCountries(); // Display filtered countries
 }
 
 function nextPage() {
