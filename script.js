@@ -50,9 +50,7 @@ function displayCountries() {
     countryCard.innerHTML = `
       <img src="${country.flags.png}" alt="${country.name.common} flag" />
       <h2>${country.name.common}</h2>
-      <p>Population: ${country.population.toLocaleString()}</p>
-      <p>Region: ${country.region}</p>
-      <button onclick="viewCountryDetails('${country.name.common}')"><b><i>View Details</i></b></button>
+      <button onclick="viewCountryDetails('${country.name.common}')"><b><i>Show more</i></b></button>
     `;
     countryList.appendChild(countryCard);
   });
