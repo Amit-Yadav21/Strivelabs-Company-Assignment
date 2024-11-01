@@ -5,8 +5,8 @@ function displayCountryDetails(country) {
   const flag = document.createElement("img");
   flag.src = country.flags.png;
   flag.alt = `${country.name.common} flag`;
-  flag.width = 400;
-  flag.height = 200;
+  flag.width = 425;
+  flag.height = 150;
 
 
   const countryName = document.createElement("h2");

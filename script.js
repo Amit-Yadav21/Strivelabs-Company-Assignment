@@ -134,3 +134,8 @@ nextPageButton.addEventListener("click", nextPage);
 prevPageButton.addEventListener("click", prevPage);
 
 fetchCountries();
+
+function toggleMenu() {
+  const navContent = document.getElementById('nav-content');
+  navContent.classList.toggle('active'); // Toggle the active class
+}

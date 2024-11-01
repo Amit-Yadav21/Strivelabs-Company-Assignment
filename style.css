@@ -16,7 +16,7 @@ body {
   color: #333;
 }
 
-/* -----------------------------Header Styling */
+/* Header Styling */
 header {
   display: flex;
   flex-direction: column;
@@ -34,12 +34,69 @@ header {
   z-index: 1000;
 }
 
+header h1{
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px;
+  width: 18%;
+}
+
+/* Responsive Header Layout for Tablet and Above */
+@media (min-width: 600px) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
 h1 {
   font-size: 24px;
   font-weight: 600;
   animation: fadeInDown 1s ease-out;
 }
 
+/* Navigation Styling */
+#hamburger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #fff;
+}
+
+#nav-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Responsive Navigation for Mobile */
+@media (max-width: 425px) {
+  #hamburger {
+    display: block;
+  }
+
+  #nav-content {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+  }
+
+  #nav-content.active {
+    display: flex;
+  }
+  header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header h1{
+    width: auto;
+    text-align: left;
+  }
+}
+
+/* Input and Select Styling */
 input[type="text"],
 select {
   padding: 10px;
@@ -57,32 +114,7 @@ select:focus {
   box-shadow: 0 0 5px #b2cbe6;
 }
 
-select {
-  cursor: pointer;
-}
-
-#region-filter{
-  width: auto;
-}
-#language-filter{
-  width: auto;
-}
-/* ------------------------------------------------- */
-
-#nav-content {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Styles for pagination */
-#pagination-controls {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-}
-
-/* -----------------------------Country List Styling */
+/* Country List Styling */
 #country-list {
   display: flex;
   flex-wrap: wrap;
@@ -127,38 +159,13 @@ select {
   margin: 10px 0;
 }
 
-.country-card p {
-  font-size: 14px;
-  color: #555;
-  margin: 5px 0;
-}
-
-/* Button Styling */
-button {
-  background-color: #00ffff;
-  color: black;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-button:hover {
-  background-color: #35ee07;
-  transform: translateY(-3px);
-}
-/* --------------------------------------------------- */
-
-/* ---------------------------Pagination Buttons Styling */
+/* Pagination Controls */
 #pagination-controls {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  padding: 20px;
 }
 
 #pagination-controls .border {
@@ -184,32 +191,88 @@ button:hover {
   transform: translateY(-3px);
 }
 
-/* --------------------------------------------- */
+/* Country Details Container */
+#country-details-container {
+  max-width: 100%;
+  width: 90%;
+  padding: 20px;
+  margin: 0 auto;
+  background-color: rgb(241, 223, 189);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
 
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+/* Heading and Paragraph Styles */
+#country-details h2 {
+  font-size: 24px;
+  color: black;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+#country-details p {
+  font-size: 20px;
+  color: black;
+  padding: 5px;
+  margin: 8px 0;
+  background-color: white;
+}
+
+/* Button Styling */
+button {
+  background-color: #00ffff;
+  color: black;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #35ee07;
+  transform: translateY(-3px);
+}
+
+/* Back Button Styling */
+#back-button {
+  color: #333;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-weight: 900;
+  transition: background-color 0.3s;
+}
+
+#back-button:hover {
+  background-color: #bbb;
+}
+
+/* Responsive Styling for Country Details */
+@media (min-width: 768px) {
+  #country-details-container {
+    width: 70%;
   }
-
-  to {
-    opacity: 1;
+  body{
+    margin-top: 2rem;
+  }
+  header h1{
+    width: auto;
+    font-size: 16px;
   }
 }
 
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
+@media (min-width: 1024px) {
+  #country-details-container {
+    width: 35%;
   }
 }
 
-/* Media Queries for Smaller Screens */
+/* Smaller Screen Adjustments */
 @media (max-width: 768px) {
   h1 {
     font-size: 20px;
@@ -230,26 +293,22 @@ button:hover {
   }
 
   #country-details p {
-    font-size: 14px;
-  }
-}
-
-@media (min-width: 600px) {
-  header {
-    flex-direction: row;
-    justify-content: space-between;
+    font-size: 20px;
+    color: black;
+    padding: 5px;
+    margin: 8px 0;
+    background-color: white;
   }
 }
 
 @media (max-width: 480px) {
   body {
-    padding: 10px;
+    padding: 0px;
   }
 
   header {
     flex-direction: row;
     text-align: center;
-    line-height: 1;
   }
 
   input[type="text"],
@@ -276,78 +335,3 @@ button:hover {
     font-size: 12px;
   }
 }
-
-/* -------------------------- Country Details Styling */
-#country-details-container {
-  max-width: 100%;
-  width: 90%; /* Default width for small screens */
-  padding: 20px;
-  margin: 0 auto; /* Center the container */
-  background-color: rgb(241, 223, 189);
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-}
-
-/* Heading and Paragraph Styles */
-#country-details h2 {
-  font-size: 24px;
-  color: black;
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-#country-details p {
-  font-size: 20px;
-  color: black;
-  padding: 5px;
-  margin: 8px 0;
-  background-color: white;
-}
-
-/* Back Button Styling */
-#back-button {
-  color: #333;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-  font-weight: 900;
-  transition: background-color 0.3s;
-}
-
-#back-button:hover {
-  background-color: #bbb;
-}
-
-/* Responsive Styles */
-@media (min-width: 320px) {
-  #country-details-container {
-    width: 100%; /* Full width for small screens */
-    margin-top: 3rem;
-  }
-
-  #country-details p {
-    margin: 0 20px 5px;
-  }
-
-  #country-details img {
-    width: 100%; /* Responsive images */
-  }
-}
-
-@media (min-width: 768px) {
-  #country-details-container {
-    width: 70%; /* Wider for tablets */
-  }
-}
-
-@media (min-width: 1024px) {
-  #country-details-container {
-    width: 35%; /* Even wider for desktops */
-  }
-}
-
-/* ----------------------------------------------------- */
