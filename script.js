@@ -31,7 +31,11 @@ async function fetchCountries() {
   try {
     const response = await fetch("https://restcountries.com/v3.1/all");
     countries = await response.json();
-    filteredCountries = countries; // Set filteredCountries to all countries by default
+
+    // Sort countries by name in ascending order
+    countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
+
+    filteredCountries = countries;
     displayCountries();
   } catch (error) {
     console.error("Error fetching countries:", error);
