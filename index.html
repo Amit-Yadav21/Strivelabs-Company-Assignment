@@ -3,12 +3,13 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Country Info</title>
+        <title>Country Explorer</title>
         <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     </head>
     <body>
         <header>
-            <h1>Country Information</h1>
+            <h1>Country Explorer</h1>
             <div id="nav-content">
                 <input type="text" id="search"
                     placeholder="Search for a country..." />
@@ -123,7 +124,19 @@
                 &#9776; <!-- This represents the hamburger icon -->
             </div>
         </header>
-        <main id="country-list"></main>
+        <!-- <main id="country-list"></main> -->
+        <!-- Main Page HTML -->
+        <div class="main-content">
+            <div class="country-list" id="country-list">
+                <!-- Country cards will be appended here dynamically -->
+            </div>
+
+            <!-- Favorites Strip on the Right Side -->
+            <div class="favorites-strip" id="favoritesStrip">
+                <h3>Favorites</h3>
+                <ul id="favoriteCountriesList"></ul>
+            </div>
+        </div>
 
         <!-- Pagination Controls -->
         <div id="pagination-controls">

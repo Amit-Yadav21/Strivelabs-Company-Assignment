@@ -41,6 +41,7 @@ async function fetchCountries() {
     console.error("Error fetching countries:", error);
   }
 }
+fetchCountries();
 
 function displayCountries() {
   countryList.innerHTML = ""; // Clear previous results
@@ -56,6 +57,7 @@ function displayCountries() {
       <img src="${country.flags.png}" alt="${country.name.common} flag" />
       <h2>${country.name.common}</h2>
       <button onclick="viewCountryDetails('${country.name.common}')"><b><i>Show more</i></b></button>
+      <p class="favorite-btn" onclick="toggleFavorite('${country.name.common}')">❤️</p>
     `;
     countryList.appendChild(countryCard);
   });
@@ -64,6 +66,66 @@ function displayCountries() {
   updatePaginationButtons();
 }
 
+// Load favorites from localStorage and display them in the sidebar with delete icon
+function loadFavorites() {
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  const favoritesStrip = document.getElementById('favoritesStrip');
+  const favoriteCountriesList = document.getElementById('favoriteCountriesList');
+
+  favoriteCountriesList.innerHTML = ''; // Clear current list
+
+  if (favorites.length > 0) {
+      favoritesStrip.style.display = 'block'; // Make strip visible if there are favorites
+
+      favorites.forEach(country => {
+          const li = document.createElement('li');
+          li.className = "favorite-item";
+          li.innerHTML = `
+              <span>${country}</span>
+              <span onclick="removeFavorite('${country}')"><i class="fa-solid fa-trash-can"></i></span>
+          `;
+          favoriteCountriesList.appendChild(li);
+      });
+  } else {
+      favoritesStrip.style.display = 'none'; // Hide if no favorites
+  }
+}
+
+// Remove favorite country
+function removeFavorite(country) {
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  
+  // Filter out the country to be removed
+  favorites = favorites.filter(fav => fav !== country);
+  
+  // Update localStorage and reload the favorites list
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+  loadFavorites();
+}
+
+// Initial load of favorites when the page loads
+window.onload = loadFavorites;
+
+
+// Toggle favorite status of a country
+function toggleFavorite(country) {
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+  if (favorites.includes(country)) {
+      // Remove from favorites if it already exists
+      favorites = favorites.filter(fav => fav !== country);
+  } else if (favorites.length < 5) {
+      // Add to favorites if not already added and limit not exceeded
+      favorites.push(country);
+  } else {
+      alert("You can only have up to 5 favorites.");
+  }
+
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+  loadFavorites(); // Refresh the favorites list display
+}
+
+// filter Country
 function filterCountries() {
   const searchValue = searchInput.value.toLowerCase();
   const selectedRegion = regionFilter.value;
@@ -99,6 +161,7 @@ function filterCountries() {
   displayCountries(); // Display filtered countries
 }
 
+// ----------------------- Pagination Details
 function nextPage() {
   if (currentPage < Math.ceil(filteredCountries.length / countriesPerPage)) {
     currentPage++;
@@ -123,7 +186,9 @@ function updatePaginationButtons() {
   nextPageButton.style.display =
     currentPage < Math.ceil(filteredCountries.length / countriesPerPage) ? "inline-block" : "none";
 }
+// ------------------------------------------ |
 
+// view Country Details
 function viewCountryDetails(countryName) {
   const country = countries.find(c => c.name.common === countryName);
   localStorage.setItem("selectedCountry", JSON.stringify(country));
@@ -137,9 +202,10 @@ languageFilter.addEventListener("change", filterCountries); // Event listener fo
 nextPageButton.addEventListener("click", nextPage);
 prevPageButton.addEventListener("click", prevPage);
 
-fetchCountries();
 
+// ---------------------------- toggle Menu
 function toggleMenu() {
   const navContent = document.getElementById('nav-content');
   navContent.classList.toggle('active'); // Toggle the active class
 }
+// ---------------------------------- |

@@ -41,14 +41,6 @@ header h1{
   width: 18%;
 }
 
-/* Responsive Header Layout for Tablet and Above */
-@media (min-width: 600px) {
-  header {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-}
-
 h1 {
   font-size: 24px;
   font-weight: 600;
@@ -61,39 +53,15 @@ h1 {
   font-size: 28px;
   cursor: pointer;
   color: #fff;
+  border: 1px solid;
+  padding: 3px;
+  border-radius: 5px;
 }
 
 #nav-content {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-/* Responsive Navigation for Mobile */
-@media (max-width: 425px) {
-  #hamburger {
-    display: block;
-  }
-
-  #nav-content {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    gap: 5px;
-  }
-
-  #nav-content.active {
-    display: flex;
-  }
-  header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  header h1{
-    width: auto;
-    text-align: left;
-  }
 }
 
 /* Input and Select Styling */
@@ -120,7 +88,7 @@ select:focus {
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 
 /* Country Card Styling */
@@ -252,6 +220,85 @@ button:hover {
   background-color: #bbb;
 }
 
+
+/* .country-card {
+  position: relative;
+} */
+
+.favorite-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.2);
+}
+
+.main-content {
+  display: flex;
+}
+
+/* Favorites Strip */
+.favorites-strip {
+  width: 800px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-left: 2px solid #a8a7a7;
+  border-bottom: 2px solid #444443;
+  display: none;
+  position: sticky;
+  top: 110px;
+  height: 200px;
+  overflow-y: auto;
+}
+.favorites-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.favorites-strip h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+/* Zebra striping for favorite items */
+#favoriteCountriesList li:nth-child(odd) {
+  padding-left: 10px;
+  background-color: #f1f1f1;
+  border-radius: 25px;
+  font-size: 1.2rem;
+}
+
+#favoriteCountriesList li:nth-child(even) {
+  padding-left: 10px;
+  background-color: #ffffff;
+  font-size: 1.2rem;
+}
+
+.favorite-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 5px 0; */
+}
+
+.fa-solid{
+  color: #ff0000;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+@media (min-width: 1024px) {
+  #country-details-container {
+    width: 35%;
+  }
+}
+
 /* Responsive Styling for Country Details */
 @media (min-width: 768px) {
   #country-details-container {
@@ -263,12 +310,6 @@ button:hover {
   header h1{
     width: auto;
     font-size: 16px;
-  }
-}
-
-@media (min-width: 1024px) {
-  #country-details-container {
-    width: 35%;
   }
 }
 
@@ -298,6 +339,14 @@ button:hover {
     padding: 5px;
     margin: 8px 0;
     background-color: white;
+  }
+}
+
+/* Responsive Header Layout for Tablet and Above */
+@media (min-width: 600px) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
 
@@ -333,5 +382,36 @@ button:hover {
   button {
     padding: 8px 10px;
     font-size: 12px;
+  }
+}
+
+/* Responsive Navigation for Mobile */
+@media (max-width: 425px) {
+  #hamburger {
+    display: block;
+  }
+
+  #nav-content {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+  }
+
+  #nav-content.active {
+    display: flex;
+  }
+  header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header h1{
+    width: auto;
+    text-align: left;
+  }
+  .main-content{
+    padding: 20px;
+    gap: 10px;
   }
 }
