@@ -56,8 +56,10 @@ function displayCountries() {
     countryCard.innerHTML = `
       <img src="${country.flags.png}" alt="${country.name.common} flag" />
       <h2>${country.name.common}</h2>
-      <button onclick="viewCountryDetails('${country.name.common}')"><b><i>Show more</i></b></button>
-      <p class="favorite-btn" onclick="toggleFavorite('${country.name.common}')">❤️</p>
+      <div class="btn-delete">
+        <button onclick="viewCountryDetails('${country.name.common}')"><b><i>Show more</i></b></button>
+        <p class="favorite-btn" onclick="toggleFavorite('${country.name.common}')">❤️</p>
+      </div>
     `;
     countryList.appendChild(countryCard);
   });
@@ -75,29 +77,29 @@ function loadFavorites() {
   favoriteCountriesList.innerHTML = ''; // Clear current list
 
   if (favorites.length > 0) {
-      favoritesStrip.style.display = 'block'; // Make strip visible if there are favorites
+    favoritesStrip.style.display = 'block'; // Make strip visible if there are favorites
 
-      favorites.forEach(country => {
-          const li = document.createElement('li');
-          li.className = "favorite-item";
-          li.innerHTML = `
+    favorites.forEach(country => {
+      const li = document.createElement('li');
+      li.className = "favorite-item";
+      li.innerHTML = `
               <span>${country}</span>
               <span onclick="removeFavorite('${country}')"><i class="fa-solid fa-trash-can"></i></span>
           `;
-          favoriteCountriesList.appendChild(li);
-      });
+      favoriteCountriesList.appendChild(li);
+    });
   } else {
-      favoritesStrip.style.display = 'none'; // Hide if no favorites
+    favoritesStrip.style.display = 'none'; // Hide if no favorites
   }
 }
 
 // Remove favorite country
 function removeFavorite(country) {
   let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-  
+
   // Filter out the country to be removed
   favorites = favorites.filter(fav => fav !== country);
-  
+
   // Update localStorage and reload the favorites list
   localStorage.setItem('favorites', JSON.stringify(favorites));
   loadFavorites();
@@ -112,13 +114,13 @@ function toggleFavorite(country) {
   let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
   if (favorites.includes(country)) {
-      // Remove from favorites if it already exists
-      favorites = favorites.filter(fav => fav !== country);
+    // Remove from favorites if it already exists
+    favorites = favorites.filter(fav => fav !== country);
   } else if (favorites.length < 5) {
-      // Add to favorites if not already added and limit not exceeded
-      favorites.push(country);
+    // Add to favorites if not already added and limit not exceeded
+    favorites.push(country);
   } else {
-      alert("You can only have up to 5 favorites.");
+    alert("You can only have up to 5 favorites.");
   }
 
   localStorage.setItem('favorites', JSON.stringify(favorites));
