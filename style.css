@@ -429,4 +429,7 @@ button:hover {
     width: 90%;
     margin-top: 5rem;
   }
+  .favorite-item span{
+    font-size: 15px;
+  }
 }
