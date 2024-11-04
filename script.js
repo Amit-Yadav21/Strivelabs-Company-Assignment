@@ -1,5 +1,4 @@
 const countryList = document.getElementById("country-list");
-const searchInput = document.getElementById("search");
 const regionFilter = document.getElementById("region-filter");
 const languageFilter = document.getElementById("language-filter");
 const nextPageButton = document.getElementById("next-page");
@@ -108,7 +107,6 @@ function removeFavorite(country) {
 // Initial load of favorites when the page loads
 window.onload = loadFavorites;
 
-
 // Toggle favorite status of a country
 function toggleFavorite(country) {
   let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -125,42 +123,6 @@ function toggleFavorite(country) {
 
   localStorage.setItem('favorites', JSON.stringify(favorites));
   loadFavorites(); // Refresh the favorites list display
-}
-
-// filter Country
-function filterCountries() {
-  const searchValue = searchInput.value.toLowerCase();
-  const selectedRegion = regionFilter.value;
-  const selectedLanguage = languageFilter.value;
-
-  // Determine which filter to apply
-  filteredCountries = countries.filter(country => {
-    const matchesSearch = country.name.common.toLowerCase().includes(searchValue);
-
-    let matchesRegion = true; // Default to true
-    if (selectedRegion !== "all") {
-      matchesRegion = country.region === selectedRegion;
-    }
-
-    let matchesLanguage = true; // Default to true
-    if (selectedLanguage !== "all") {
-      matchesLanguage = country.languages && Object.values(country.languages).includes(selectedLanguage);
-    }
-
-    // Only apply one filter at a time
-    if (selectedRegion !== "all" && selectedLanguage !== "all") {
-      return matchesSearch && matchesRegion; // Only region filter applied
-    } else if (selectedLanguage !== "all") {
-      return matchesSearch && matchesLanguage; // Only language filter applied
-    } else if (selectedRegion !== "all") {
-      return matchesSearch && matchesRegion; // Only region filter applied
-    } else {
-      return matchesSearch; // No filter applied
-    }
-  });
-
-  currentPage = 1;
-  displayCountries(); // Display filtered countries
 }
 
 // ----------------------- Pagination Details
@@ -198,12 +160,35 @@ function viewCountryDetails(countryName) {
 }
 
 // Event listeners for filters and pagination
-searchInput.addEventListener("input", filterCountries);
 regionFilter.addEventListener("change", filterCountries);
 languageFilter.addEventListener("change", filterCountries); // Event listener for language filter
 nextPageButton.addEventListener("click", nextPage);
 prevPageButton.addEventListener("click", prevPage);
 
+
+// Function to filter countries based on region and language
+function filterCountries() {
+  const selectedRegion = regionFilter.value;
+  const selectedLanguage = languageFilter.value;
+
+  // Determine which filter to apply
+  filteredCountries = countries.filter(country => {
+    let matchesRegion = true; // Default to true
+    if (selectedRegion !== "all") {
+      matchesRegion = country.region === selectedRegion;
+    }
+
+    let matchesLanguage = true; // Default to true
+    if (selectedLanguage !== "all") {
+      matchesLanguage = country.languages && Object.values(country.languages).includes(selectedLanguage);
+    }
+
+    return matchesRegion && matchesLanguage; // Apply filters
+  });
+
+  currentPage = 1; // Reset to first page when filtering
+  displayCountries(); // Display filtered countries
+}
 
 // ---------------------------- toggle Menu
 function toggleMenu() {
@@ -211,3 +196,108 @@ function toggleMenu() {
   navContent.classList.toggle('active'); // Toggle the active class
 }
 // ---------------------------------- |
+
+// ----------------------------------------------------- Suggestion and search country 
+const apiUrl = 'https://restcountries.com/v3.1/all';
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('search');
+  const suggestionsDropdown = document.getElementById('suggestions');
+
+  searchInput.addEventListener('input', async (event) => {
+    const query = event.target.value.toLowerCase();
+    if (query) {
+      const countries = await fetchCountries();
+      const filteredCountries = countries.filter(country =>
+        country.name.common.toLowerCase().includes(query)
+      ).slice(0, 5); // Get up to 5 results
+
+      displaySuggestions(filteredCountries);
+    } else {
+      suggestionsDropdown.style.display = 'none'; 
+    }
+  });
+
+  // Function to fetch countries from the API
+  async function fetchCountries() {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    return data;
+  }
+
+  // Function to display suggestions
+  function displaySuggestions(countries) {
+    suggestionsDropdown.innerHTML = ''; // Clear previous suggestions
+
+    countries.forEach(country => {
+      const item = document.createElement('div');
+      item.classList.add('suggestion-item');
+
+      // Create an image element for the country flag
+      const flagImg = document.createElement('img');
+      flagImg.src = country.flags.png;
+      flagImg.alt = `${country.name.common} flag`;
+      flagImg.classList.add('suggestion-flag'); 
+      flagImg.style.width = '40px';  
+      flagImg.style.height = '30px'; 
+
+      // Create a span for the country name
+      const countryName = document.createElement('span');
+      countryName.textContent = country.name.common;
+      countryName.style.marginLeft = '10px'; 
+
+      item.onclick = () => {
+        searchInput.value = country.name.common; // Set input to clicked suggestion
+        suggestionsDropdown.style.display = 'none'; // Hide dropdown
+        // Call a function to filter and display the selected country's details
+        filterCountriesByName(country.name.common);
+      };
+
+      item.appendChild(flagImg); 
+      item.appendChild(countryName); 
+      suggestionsDropdown.appendChild(item); 
+    });
+
+    // filter countries by name and update the display
+    function filterCountriesByName(countryName) {
+      // Assuming you already have a way to reset currentPage and filteredCountries
+      filteredCountries = countries.filter(country =>
+        country.name.common === countryName
+      );
+
+      currentPage = 1; // Reset to the first page
+      displayCountries(); 
+    }
+
+    // Add a "View all" option at the end of the suggestions
+    const viewAllItem = document.createElement('div');
+    viewAllItem.textContent = 'View all';
+    viewAllItem.classList.add('suggestion-item','view-all'); // Add "suggestion-item" and "view-all" classes
+    viewAllItem.onclick = () => {
+      suggestionsDropdown.style.display = 'none'; 
+      // Filter countries based on the current search input value
+      const query = searchInput.value.toLowerCase();
+      filteredCountries = countries.filter(country =>
+        country.name.common.toLowerCase().includes(query)
+      );
+
+      currentPage = 1; // Reset to the first page
+      displayCountries(); 
+    };
+
+    suggestionsDropdown.appendChild(viewAllItem); // Add "View all" option
+    suggestionsDropdown.style.display = countries.length ? 'block' : 'none'; // Show/hide dropdown
+
+  }
+
+  function displayAllCountries() {
+    console.log('Display all countries'); 
+  }
+
+  // Clicking outside the dropdown should hide it
+  document.addEventListener('click', (event) => {
+    if (!suggestionsDropdown.contains(event.target) && event.target !== searchInput) {
+      suggestionsDropdown.style.display = 'none';
+    }
+  });
+});
+// ---------------------------------------------------|

@@ -161,17 +161,20 @@ select:focus {
 /* Country Details Container */
 #country-details-container {
   /* max-width: 100%; */
-  width: 100%;
+  /* width: 100%; */
   padding: 20px;
   margin: 0 auto;
-  background-color: rgb(241, 223, 189);
+  /* background-color: rgb(241, 223, 189); */
   border-radius: 5px;
+  border: 1px solid;
   display: flex;
   flex-direction: column;
 }
 
 #country-details img{
-  width: 100%;
+  width: 50%;
+  display: block; /* Makes the image a block element */
+  margin: 0 auto; /* Centers it */
 }
 
 /* Heading and Paragraph Styles */
@@ -187,6 +190,7 @@ select:focus {
   color: black;
   padding: 5px;
   margin: 8px 0;
+  /* width: 50%; */
   background-color: white;
 }
 
@@ -209,12 +213,13 @@ button:hover {
 
 /* Back Button Styling */
 #back-button {
+  width: 50%;
   color: #333;
   border: none;
   padding: 8px 15px;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px;
+  margin: 20px auto 0; /* Centers the button horizontally */
   font-weight: 900;
   transition: background-color 0.3s;
 }
@@ -249,6 +254,8 @@ button:hover {
 
 .main-content {
   display: flex;
+  justify-content: center;
+  /* align-items: center; */
 }
 
 /* Favorites Strip */
@@ -300,6 +307,46 @@ button:hover {
   cursor: pointer;
   font-size: 16px;
 }
+/* ............................................... */
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+}
+
+#suggestions {
+  background: white;
+  color: black;
+  position: absolute;
+  z-index: 1000;
+  width: auto;
+  max-height: 200px; 
+  overflow-y: auto;
+  margin-top: 15.5rem;
+
+}
+#suggestions::-webkit-scrollbar {
+  display: none;
+}
+
+.view-all {
+  font-weight: bold;
+  /* color: #00ff73; */
+  background-color: #b2cbe6;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* ................................................................ */
 
 @media (min-width: 1024px) {
   #country-details-container {
@@ -432,5 +479,8 @@ button:hover {
   }
   .favorite-item span{
     font-size: 15px;
+  }
+  #suggestions{
+    margin-top: 3.5rem;
   }
 }
