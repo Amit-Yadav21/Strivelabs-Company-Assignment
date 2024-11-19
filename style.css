@@ -207,7 +207,8 @@ button {
 }
 
 button:hover {
-  background-color: #35ee07;
+  background-color: white;
+  border: 1px solid;
   transform: translateY(-3px);
 }
 

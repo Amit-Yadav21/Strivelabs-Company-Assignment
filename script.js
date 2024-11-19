@@ -56,7 +56,7 @@ function displayCountries() {
       <img src="${country.flags.png}" alt="${country.name.common} flag" />
       <h2>${country.name.common}</h2>
       <div class="btn-delete">
-        <button onclick="viewCountryDetails('${country.name.common}')"><b><i>Show more</i></b></button>
+        <button onclick="viewCountryDetails('${country.name.common}')"><b><i>more details</i></b></button>
         <p class="favorite-btn" onclick="toggleFavorite('${country.name.common}')">❤️</p>
       </div>
     `;
